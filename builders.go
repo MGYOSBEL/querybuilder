@@ -13,8 +13,11 @@ func SelectColumnsFromTableWhereCondition(columns []Column, tableName string, co
 	return fmt.Sprintf("SELECT %s FROM %s %s", cols, tableName, whereCondition)
 }
 
-func UpdateTableSetColumnWherePrimaryKeyInIds(tableName string, updateStatement Condition, key string, ids string) string {
+func UpdateTableSetColumnWherePrimaryKeyInIds(tableName string, updateStatement Condition, key string, ids string) (string, error) {
 	statement := parseCondition(updateStatement)
 
-	return fmt.Sprintf("UPDATE %s SET %s WHERE %s IN %s", tableName, statement, key, ids)
+	if isEmpty(statement) {
+		return "", fmt.Errorf("Empty statement")
+	}
+	return fmt.Sprintf("UPDATE %s SET %s WHERE %s IN %s", tableName, statement, key, ids), nil
 }
