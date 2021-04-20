@@ -6,7 +6,7 @@ func SelectColumnsFromTableWhereCondition(columns []Column, tableName string, co
 	cols := parseColumns(columns, options)
 	cond := parseCondition(condition)
 	whereCondition := ""
-	if cond != "" {
+	if !isEmpty(cond) {
 		whereCondition = fmt.Sprintf("WHERE %s", cond)
 	}
 

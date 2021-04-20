@@ -1,12 +1,15 @@
 package querybuilder
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-func parseColumns(columns []Column, options TableOptions) (cols string ){
+func parseColumns(columns []Column, options TableOptions) (cols string) {
 	cols = ""
 	for i, col := range columns {
 		cols = cols + formatColumnByType(col, options)
-		if i != len(columns) - 1 {
+		if i != len(columns)-1 {
 			cols = cols + ", "
 		}
 	}
@@ -28,4 +31,9 @@ func formatDateColumn(colName string, options TableOptions) string {
 
 func parseCondition(condition Condition) string {
 	return fmt.Sprintf("%s %s %s", condition.Column, condition.Operator, condition.Value)
+}
+
+func isEmpty(str string) bool {
+	trimmedStr := strings.ReplaceAll(str, " ", "")
+	return len(trimmedStr) == 0
 }
