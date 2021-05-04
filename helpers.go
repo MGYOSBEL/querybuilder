@@ -33,12 +33,13 @@ func parseCondition(condition Condition) string {
 	return fmt.Sprintf("%s %s %s", condition.Column, condition.Operator, condition.Value)
 }
 
-func parseConditions(conditions []Condition) string {
+func parseConditions(conditions []Condition, operator string) string {
 	cond_str := ""
 	for idx, cond := range conditions {
 		cond_str = cond_str + parseCondition(cond)
 		if len(conditions) > idx {
-			cond_str = cond_str + " AND "
+			op_str := fmt.Sprintf(" %s ", operator)
+			cond_str = cond_str + op_str
 		}
 	}
 	return cond_str

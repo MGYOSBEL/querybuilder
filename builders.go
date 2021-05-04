@@ -9,7 +9,26 @@ func SelectColumnsFromTableWhereCondition(columns []Column, tableName string, co
 	if !isEmpty(cond) {
 		whereCondition = fmt.Sprintf("WHERE %s", cond)
 	}
+	return fmt.Sprintf("SELECT %s FROM %s %s", cols, tableName, whereCondition)
+}
 
+func SelectColumnsFromTableWhereAllConditions(columns []Column, tableName string, conditions []Condition, options TableOptions) string {
+	cols := parseColumns(columns, options)
+	cond := parseConditions(conditions, "AND")
+	whereCondition := ""
+	if !isEmpty(cond) {
+		whereCondition = fmt.Sprintf("WHERE %s", cond)
+	}
+	return fmt.Sprintf("SELECT %s FROM %s %s", cols, tableName, whereCondition)
+}
+
+func SelectColumnsFromTableWhereAtLeastOneCondition(columns []Column, tableName string, conditions []Condition, options TableOptions) string {
+	cols := parseColumns(columns, options)
+	cond := parseConditions(conditions, "OR")
+	whereCondition := ""
+	if !isEmpty(cond) {
+		whereCondition = fmt.Sprintf("WHERE %s", cond)
+	}
 	return fmt.Sprintf("SELECT %s FROM %s %s", cols, tableName, whereCondition)
 }
 
