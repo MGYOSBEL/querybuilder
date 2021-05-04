@@ -33,6 +33,17 @@ func parseCondition(condition Condition) string {
 	return fmt.Sprintf("%s %s %s", condition.Column, condition.Operator, condition.Value)
 }
 
+func parseConditions(conditions []Condition) string {
+	cond_str := ""
+	for idx, cond := range conditions {
+		cond_str = cond_str + parseCondition(cond)
+		if len(conditions) > idx {
+			cond_str = cond_str + " AND "
+		}
+	}
+	return cond_str
+}
+
 func isEmpty(str string) bool {
 	trimmedStr := strings.ReplaceAll(str, " ", "")
 	return len(trimmedStr) == 0
