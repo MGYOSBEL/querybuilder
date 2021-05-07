@@ -1,23 +1,23 @@
 package querybuilder
 
- type Column struct{
+type Column struct {
 	Name string
 	Type string
 }
 
 type Condition struct {
-	Column string
+	Column   string
 	Operator string
-	Value string
+	Value    string
 }
 
 type Table struct {
-	Name string
-	Columns []Column
-	PrimaryKey []string
-	WhereCondition Condition
+	Name            string
+	Columns         []Column
+	PrimaryKey      []string
+	WhereCondition  Condition
 	UpdateStatement Condition
-	Options TableOptions
+	Options         TableOptions
 }
 
 type Config struct {
@@ -25,7 +25,8 @@ type Config struct {
 }
 
 type TableOptions struct {
-	SourceDateFormat string
-	OutputDateFormat string
-
+	SourceDateFormat      string
+	OutputDateFormat      string
+	MultipleRecordsPerKey bool
+	GroupBy               string
 }
