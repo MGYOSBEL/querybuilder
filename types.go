@@ -18,6 +18,8 @@ type Table struct {
 	WhereCondition  Condition
 	UpdateStatement Condition
 	Options         TableOptions
+	MasterTableName string
+	MasterKey       string
 }
 
 type Config struct {
